@@ -53,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
         example.createCriteria().andCidEqualTo(cid);
         example.setOrderByClause("id desc");
         List<Product> products = productMapper.selectByExample(example);
+        setFirstProductImage(products);
         setCategory(products);
         return products;
     }

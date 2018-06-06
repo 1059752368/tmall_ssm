@@ -63,7 +63,7 @@ public class ProductController {
         page.setTotal(total);
         page.setParam("&cid="+category.getId());
 
-        productService.setFirstProductImage(ps);
+//        productService.setFirstProductImage(ps);
 
         model.addAttribute("ps",ps);
         model.addAttribute("category",category);
