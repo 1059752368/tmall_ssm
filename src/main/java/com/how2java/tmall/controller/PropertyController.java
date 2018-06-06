@@ -1,7 +1,6 @@
 package com.how2java.tmall.controller;
 
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.how2java.tmall.pojo.Category;
@@ -24,16 +23,16 @@ public class PropertyController {
     PropertyService propertyService;
 
     @RequestMapping("admin_property_add")
-    public String add(Model model, Property property){
+    public String add(Property property){
         propertyService.add(property);
         return "redirect:admin_property_list?cid="+property.getCid();
     }
 
     @RequestMapping("admin_property_delete")
     public String delete(int id){
-        Property p = propertyService.get(id);
+        Property property = propertyService.get(id);
         propertyService.delete(id);
-        return "redirect:admin_property_list?cid="+p.getCid();
+        return "redirect:admin_property_list?cid="+property.getCid();
     }
 
     @RequestMapping("admin_property_edit")
@@ -41,7 +40,7 @@ public class PropertyController {
         Property property = propertyService.get(id);
         Category category = categoryService.get(property.getCid());
         property.setCategory(category);
-        model.addAttribute("p", property);
+        model.addAttribute("property", property);
         return "admin/editProperty";
     }
 
@@ -51,7 +50,7 @@ public class PropertyController {
         return "redirect:admin_property_list?cid="+property.getCid();
     }
 
-    @RequestMapping()
+    @RequestMapping("admin_property_list")
     public String list(int cid, Model model, com.how2java.tmall.util.Page page){
         Category category = categoryService.get(cid);
         PageHelper.offsetPage(page.getStart(),page.getCount());
